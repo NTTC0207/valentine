@@ -96,17 +96,20 @@ const RedPacket = () => {
     }));
   };
 
-  const handleMouseMove = (e) => {
+  const handleInteraction = (clientX, clientY) => {
     const container = containerRef.current;
     if (!container) return;
 
     const containerRect = container.getBoundingClientRect();
-    const cursorX = e.clientX - containerRect.left;
-    const cursorY = e.clientY - containerRect.top;
+    const cursorX = clientX - containerRect.left;
+    const cursorY = clientY - containerRect.top;
 
     amounts.forEach((amt) => {
-      // Only evade if strictly greater than 520 AND it has already been moved once
-      if (amt.value > 520 && buttonStyles[amt.value]) {
+      // Logic for buttons > 520
+      if (amt.value > 520) {
+        // If it hasn't moved yet (initial state), check if we are close to the static position
+        // Since we don't know the exact static pos easily without a ref map or layout read,
+        // rely on the buttonRefs
         const btn = buttonRefs.current[amt.value];
         if (btn) {
           const btnRect = btn.getBoundingClientRect();
@@ -115,12 +118,26 @@ const RedPacket = () => {
 
           const distance = Math.hypot(cursorX - btnX, cursorY - btnY);
 
+          // Evade if close (150px radius)
           if (distance < 150) {
+            // If function is called, it means we are interacting.
+            // If it's the first time (no buttonStyle), we still want to move.
             moveButton(amt.value, cursorX, cursorY);
           }
         }
       }
     });
+  };
+
+  const handleMouseMove = (e) => {
+    handleInteraction(e.clientX, e.clientY);
+  };
+
+  const handleTouchMove = (e) => {
+    // Prevent scrolling while trying to catch buttons? Maybe not, better UX to allow scroll.
+    // But for the game area, we might want to track the finger.
+    const touch = e.touches[0];
+    handleInteraction(touch.clientX, touch.clientY);
   };
 
   const handleSelect = (amount) => {
@@ -204,6 +221,7 @@ const RedPacket = () => {
           className="rp-game-area"
           ref={containerRef}
           onMouseMove={handleMouseMove}
+          onTouchMove={handleTouchMove}
         >
           <div className="hearts-bg">
             {backgroundHearts.map((heart) => (
@@ -228,12 +246,25 @@ const RedPacket = () => {
                   style={buttonStyles[amt.value] || {}}
                   // Initialize evasion on first hover for boss buttons
                   onMouseEnter={(e) => {
-                    if (amt.value > 520 && !buttonStyles[amt.value]) {
+                    if (amt.value > 520) {
                       const rect = containerRef.current.getBoundingClientRect();
                       moveButton(
                         amt.value,
                         e.clientX - rect.left,
                         e.clientY - rect.top,
+                      );
+                    }
+                  }}
+                  // Mobile Support: Move on Touch Start
+                  onTouchStart={(e) => {
+                    if (amt.value > 520) {
+                      e.preventDefault(); // Prevent click
+                      const rect = containerRef.current.getBoundingClientRect();
+                      const touch = e.touches[0];
+                      moveButton(
+                        amt.value,
+                        touch.clientX - rect.left,
+                        touch.clientY - rect.top,
                       );
                     }
                   }}

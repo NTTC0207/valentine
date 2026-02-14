@@ -5,7 +5,6 @@ import RedPacket from "./pages/RedPacket";
 import FortuneWheel from "./pages/FortuneWheel";
 import GiftSelection from "./pages/GiftSelection";
 import FinalChapter from "./pages/FinalChapter";
-import MobileBlocker from "./components/MobileBlocker";
 import Preloader from "./components/Preloader";
 import "./pages/RedPacket.css";
 
@@ -15,7 +14,7 @@ function App() {
   return (
     <Router>
       {loading && <Preloader onComplete={() => setLoading(false)} />}
-      <MobileBlocker />
+      {/* <MobileBlocker /> */}
       <Routes>
         <Route path="/" element={<Gallery isReady={!loading} />} />
         <Route path="/red-packet" element={<RedPacket />} />
