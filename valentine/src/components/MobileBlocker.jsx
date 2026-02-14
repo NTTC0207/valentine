@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import "./MobileBlocker.css";
 
 const MobileBlocker = () => {
@@ -22,33 +23,62 @@ const MobileBlocker = () => {
   if (!isMobile) return null;
 
   return (
-    <div className="mobile-blocker">
-      <div className="mobile-content">
-        <h1 className="mobile-title">Oops! Screen Too Small</h1>
-        <p className="mobile-text">
-          My love for you is too big to fit on this tiny screen! 💖
-          <br />
-          <br />
-          Please open this on a laptop or computer to see the surprise!
-        </p>
-      </div>
+    <motion.div
+      className="mobile-blocker"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {/* Cinematic Overlays */}
+      <div className="vignette-global"></div>
+      <div className="scanlines-global"></div>
 
-      {/* Background Hearts */}
-      <div className="hearts-bg" style={{ zIndex: -1 }}>
-        {Array.from({ length: 10 }).map((_, i) => (
-          <div
-            key={i}
-            className="heart"
-            style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
-              opacity: 0.5,
-            }}
-          />
-        ))}
+      <div className="mobile-content-cinema">
+        <div className="cinema-eyebrow warning">
+          <span className="dot red"></span> SYSTEM_ALERT // RESOLUTION_MISMATCH
+        </div>
+
+        <h1 className="cinema-title glitch-text">
+          ACCESS <span className="outline-red">DENIED</span>
+        </h1>
+
+        <div className="lock-icon-container">
+          <svg viewBox="0 0 100 100" className="lock-svg">
+            <motion.circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="var(--cinema-red)"
+              strokeWidth="1"
+              strokeDasharray="10 5"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.path
+              d="M35,45 V35 A15,15 0 0,1 65,35 V45 H70 V75 H30 V45 Z M40,45 V35 A10,10 0 0,1 60,35 V45 Z"
+              fill="none"
+              stroke="var(--cinema-red)"
+              strokeWidth="2"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+          </svg>
+        </div>
+
+        <p className="mobile-message">
+          TERMINAL DISPLAY TOO SMALL.
+          <br />
+          THE VALENTINE ARCHIVE REQUIRES A DESKTOP INTERFACE FOR FULL IMMERSION.
+        </p>
+
       </div>
-    </div>
+    </motion.div>
   );
 };
 

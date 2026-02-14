@@ -258,7 +258,7 @@ const RedPacket = () => {
         <div className="celebration-overlay">
           <div className="celebration-content">
             <h1 className="celebration-title">
-              {"情人節快樂".split("").map((char, index) => (
+              {"Happy Valentine’s Day!".split("").map((char, index) => (
                 <span
                   key={index}
                   className="celebration-char"
