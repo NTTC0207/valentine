@@ -191,21 +191,29 @@ function Gallery({ isReady }) {
 
       {/* Navigation Button */}
       <motion.div variants={itemVariants} className="gallery-nav-container">
-        {isUnlocked ? (
-          <button
-            className="cinema-action-btn unlocked"
-            onClick={() => navigate("/gift-selection")}
-          >
-            CHOOSE YOUR GIFT <span className="arrow">→</span>
-          </button>
-        ) : (
-          <button
-            className="cinema-action-btn locked"
-            onClick={() => setShowQuiz(true)}
-          >
-            UNLOCK EXPERIENCED <span className="lock">🔐</span>
-          </button>
-        )}
+        <motion.div
+          animate={{
+            opacity: selectedImage ? 0 : 1,
+            pointerEvents: selectedImage ? "none" : "auto",
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {isUnlocked ? (
+            <button
+              className="cinema-action-btn unlocked"
+              onClick={() => navigate("/gift-selection")}
+            >
+              CHOOSE YOUR GIFT <span className="arrow">→</span>
+            </button>
+          ) : (
+            <button
+              className="cinema-action-btn locked"
+              onClick={() => setShowQuiz(true)}
+            >
+              UNLOCK EXPERIENCE <span className="lock">🔐</span>
+            </button>
+          )}
+        </motion.div>
       </motion.div>
 
       {/* Quiz Modal */}
