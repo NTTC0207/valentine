@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "question": "我的的anniversary是几号? ",
+    "options": [
+      "2月14日",
+      "3月14日",
+      "5月20日",
+      "2月27日"
+    ],
+    "correctAnswer": "3月14日"
+  },
+  {
+    "id": 2,
+    "question": "我们几几年在一起？",
+    "options": [
+      "2021",
+      "2022",
+      "2023",
+      "2024"
+    ],
+    "correctAnswer": "2022"
+  },
+  {
+    "id": 3,
+    "question": "第一次一起玩的运动是什么？",
+    "options": [
+      "游泳",
+      "Badminton",
+      "WWE",
+      "Ping Pong"
+    ],
+    "correctAnswer": "WWE"
+  },
+  {
+    "id": 4,
+    "question": "在一起后我们第一次去哪里走走？",
+    "options": [
+      "Kintar River Down",
+      "KL",
+      "Sitiawan",
+      "Tanah Merah"
+    ],
+    "correctAnswer": "Sitiawan"
+  },
+  {
+    "id": 5,
+    "question": "弄給你吃的第一個東西是是什麼？",
+    "options": [
+      "Maggi + 菜",
+      "Cheese Macaroni + 水餃",
+      "部隊鍋",
+      "鼻屎"
+    ],
+    "correctAnswer": "Cheese Macaroni + 水餃"
+  },
+  {
+    "id": 6,
+    "question": "男朋友最喜歡的歌手是？",
+    "options": [
+      "Martin Garrix",
+      "薛之謙",
+      "伍佰",
+      "孫燕姿"
+    ],
+    "correctAnswer": "薛之謙"
+  },
+  {
+    "id": 7,
+    "question": "男朋友最喜歡的歌是？",
+    "options": [
+      "Another Love",
+      "Bads",
+      "Animals",
+      "一半"
+    ],
+    "correctAnswer": "一半"
+  },
+  {
+    "id": 8,
+    "question": "男朋友最喜歡的食物是？",
+    "options": [
+      "牛排",
+      "炸雞",
+      "Burger",
+      "Siew Hui 肉"
+    ],
+    "correctAnswer": "牛排"
+  },
+  {
+    "id": 9,
+    "question": "男朋友最喜歡的運動是？",
+    "options": [
+      "羽球",
+      "Ping Pong",
+      "跑步",
+      "Gym"
+    ],
+    "correctAnswer": "羽球"
+  },
+  {
+    "id": 10,
+    "question": "男朋友最喜歡的顏色是？",
+    "options": [
+      "粉色",
+      "淺綠色",
+      "黑色",
+      "藍色"
+    ],
+    "correctAnswer": "黑色"
+  }
+]

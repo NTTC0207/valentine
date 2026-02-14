@@ -1,0 +1,54 @@
+.polaroid-column {
+  overflow: hidden;
+  height: 100vh;
+  position: relative;
+  padding: 0 15px; /* Add horizontal padding to prevent hover clipping */
+}
+
+/* Performant replacement for mask-image */
+.polaroid-column::before,
+.polaroid-column::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 15vh;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.polaroid-column::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg-gradient-start), transparent);
+}
+
+.polaroid-column::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg-gradient-end), transparent);
+}
+
+.polaroid-track {
+  display: flex;
+  flex-direction: column;
+  /* No gap, handled by margin-bottom in card */
+  animation-name: scrollVertical;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  
+  /* Ensure the track is positioned for the transform */
+  will-change: transform;
+}
+
+/* Pause animation on hover */
+.polaroid-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollVertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}

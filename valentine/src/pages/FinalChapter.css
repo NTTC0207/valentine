@@ -1,0 +1,122 @@
+.final-chapter-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #000;
+  scroll-behavior: smooth;
+}
+
+.final-chapter-root::-webkit-scrollbar {
+  width: 6px;
+}
+
+.final-chapter-root::-webkit-scrollbar-thumb {
+  background: var(--cinema-title);
+  border-radius: 10px;
+}
+
+.convergence-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.sync-status {
+  position: absolute;
+  top: 15vh;
+  font-family: monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  color: var(--cinema-title);
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.orb {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.orb-fixed {
+  background: radial-gradient(circle, #ff9a9e 0%, transparent 70%);
+  box-shadow: 0 0 100px #ff9a9e;
+  z-index: 11;
+}
+
+.orb-mouse {
+  background: radial-gradient(circle, #d6336c 0%, transparent 70%);
+  box-shadow: 0 0 80px #d6336c;
+  z-index: 12;
+}
+
+.supernova-overlay {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+/* Final Letter Styling */
+.final-letter-container {
+  max-width: 800px;
+  width: 90%;
+  text-align: left;
+  z-index: 100;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(214, 51, 108, 0.1);
+  backdrop-filter: blur(10px);
+  margin-bottom: 40px;
+}
+
+.final-chapter-root .cinema-container {
+  height: auto;
+  min-height: 90vh;
+  padding: 60px 40px;
+}
+
+.letter-header {
+  margin-bottom: 40px;
+}
+
+.letter-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--cinema-text);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+.letter-footer {
+  margin-top: 60px;
+  text-align: right;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--cinema-title);
+}
+
+.convergence-instruction {
+  position: absolute;
+  bottom: 10vh;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: white;
+  opacity: 0.3;
+  text-transform: uppercase;
+  pointer-events: none;
+}

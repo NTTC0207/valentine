@@ -1,0 +1,60 @@
+.polaroid-card {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.polaroid-inner {
+  background-color: #fff;
+  padding: 15px 15px 15px 15px; /* Even padding around image */
+  padding-bottom: 50px; /* Extra space at bottom for caption */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform-origin: center;
+  overflow: hidden; /* Ensure nothing spills out of the card */
+  will-change: transform, box-shadow;
+}
+
+/* Container for the image to enforce aspect ratio and crop */
+.polaroid-image-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Square photo area */
+  overflow: hidden;
+  background-color: #f0f0f0; /* Placeholder color */
+  position: relative;
+  will-change: transform;
+}
+
+.polaroid-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This centers and crops the image correctly */
+  display: block;
+  /* Removed heavy filters for performance */
+  will-change: transform;
+}
+
+/* Hover effects - let Framer Motion handle scaling for spring physics */
+.polaroid-card:hover {
+  z-index: 100 !important;
+}
+
+.polaroid-card:hover .polaroid-inner {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.polaroid-caption {
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px; /* Matches the padding-bottom roughly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a4a4a;
+  font-size: 1.5rem;
+  line-height: 1;
+}

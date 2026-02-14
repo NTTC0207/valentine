@@ -1,0 +1,254 @@
+.red-packet-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem;
+}
+
+.rp-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.rp-subtitle {
+  margin: 0;
+}
+
+.rp-game-area {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 20px;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+  z-index: 5;
+  padding: 20px;
+}
+
+.rp-btn-wrapper {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rp-btn {
+  background: white;
+  border: 2px solid var(--cinema-title);
+  color: var(--cinema-title);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(214, 51, 108, 0.1);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+}
+
+.rp-btn:hover {
+  background: var(--cinema-title);
+  color: white;
+  transform: scale(1.05);
+}
+
+.rp-btn {
+  background: white;
+  border: 2px solid #ff6b6b;
+  color: #ff6b6b;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  position: relative; /* Default position */
+  z-index: 20;
+  
+  display: flex;
+  align-items: baseline; /* Better for text alignment if fonts differ */
+  justify-content: center; 
+  gap: 0.2rem;
+}
+
+.rp-btn:hover {
+  transform: scale(1.1);
+  background: #ff6b6b;
+  color: white;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+}
+
+/* Currency Symbol Alignment */
+.currency-symbol {
+  font-size: 1rem;
+  align-self: center; /* Or center/baseline depending on pref, center usually safer for differing fonts */
+  margin-right: 2px;
+}
+
+/* For the evasive buttons when they go absolute */
+.rp-btn.run-away {
+  transition: top 0.2s ease-out, left 0.2s ease-out, transform 0.2s; 
+  /* Reduce transition time for snappier evasion */
+}
+
+/* Shake animation for too small amounts */
+.rp-btn.shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  background: #ffe0e0; /* Slight red tint to indicate rejection */
+  color: #ff4757;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Confetti styling (simple overlay) */
+.confetti-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.3);
+  font-size: 5rem;
+  pointer-events: none;
+  z-index: 1000;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Navigation Button Style (for Gallery Page) */
+.next-page-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 500;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+}
+
+.next-page-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Full Screen Celebration Overlay */
+.celebration-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 182, 193, 0.95); /* More opaque */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.5s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+.celebration-content {
+  text-align: center;
+  /* animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); Removed to let children animate */
+}
+
+.celebration-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 5rem;
+  color: #ff3366;
+  margin: 0;
+  text-shadow: 3px 3px 0px white;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap; /* Handle smaller screens */
+}
+
+.celebration-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) scale(0.5);
+  animation: charPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.celebration-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-top: 1.5rem;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.5s forwards; /* Delay until title finishes */
+}
+
+.loading-dots::after {
+  content: ' .';
+  animation: dots 1.5s steps(5, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ' .'; }
+  40% { content: ' ..'; }
+  60% { content: ' ...'; }
+  80%, 100% { content: ' ....'; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes charPop {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.5) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}

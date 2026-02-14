@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Gallery from "./pages/Gallery";
+import RedPacket from "./pages/RedPacket";
+import FortuneWheel from "./pages/FortuneWheel";
+import GiftSelection from "./pages/GiftSelection";
+import FinalChapter from "./pages/FinalChapter";
+import MobileBlocker from "./components/MobileBlocker";
+import Preloader from "./components/Preloader";
+import "./pages/RedPacket.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(true);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
+      <MobileBlocker />
+      <Routes>
+        <Route path="/" element={<Gallery isReady={!loading} />} />
+        <Route path="/red-packet" element={<RedPacket />} />
+        <Route path="/fortune-wheel" element={<FortuneWheel />} />
+        <Route path="/gift-selection" element={<GiftSelection />} />
+        <Route path="/final-chapter" element={<FinalChapter />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

@@ -1,0 +1,305 @@
+.fortune-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem;
+}
+
+.fortune-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.cinematic-text {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--cinema-title);
+  opacity: 0.7;
+}
+
+.wheel-wrapper {
+  position: relative;
+  width: min(380px, 80vw);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  font-size: 2rem;
+  color: #ff4757;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: 0 0 50px rgba(255, 154, 158, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+  /* Conic gradient is handled in JS */
+}
+
+.wheel-divider-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform-origin: bottom center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.wheel-label-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 0;
+  transform-origin: 0% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Move to outer part */
+  padding-right: 10%; /* Inset slightly from the edge */
+  pointer-events: none;
+  z-index: 5;
+}
+
+.wheel-label-text {
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: clamp(0.6rem, 2vw, 0.9rem); /* Smaller font for longer labels */
+  color: #d6336c;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  transform: rotate(0deg); 
+  display: block;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: #f0f0f0;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+.modal-close-btn:hover {
+  background: #ff4d6d;
+  color: white;
+  transform: rotate(90deg);
+}
+
+.spin-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  border: 4px solid #ff4d6d;
+  color: #ff4d6d;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spin-button:hover:not(.disabled) {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: #ff4d6d;
+  color: white;
+}
+
+.spin-button.disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  background: #f0f0f0;
+}
+
+/* Modal Stylings */
+.wheel-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.wheel-modal {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 2rem;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.result-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ff4d6d;
+  margin: 1.5rem 0;
+  font-family: 'Playfair Display', serif;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal-buttons.vertical {
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+  align-items: center;
+}
+
+.claim-btn, .retry-btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Playfair Display', serif;
+}
+
+.claim-btn {
+  background: linear-gradient(135deg, #ff4d6d, #ff0a54);
+  color: white;
+}
+
+.retry-btn {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.claim-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+}
+
+/* Background Hearts for Wheel Page */
+.wheel-hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.wheel-heart {
+  position: absolute;
+  bottom: -20px;
+  width: 20px;
+  height: 20px;
+  background: #ff9a9e;
+  transform: rotate(-45deg);
+  opacity: 0.3;
+  animation: wheelHeartFloat linear infinite;
+}
+
+.wheel-heart::before,
+.wheel-heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.wheel-heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.wheel-heart::after {
+  left: 10px;
+  top: 0;
+}
+
+@keyframes wheelHeartFloat {
+  0% { transform: translateY(0) rotate(-45deg) scale(1); opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { transform: translateY(-100vh) rotate(-45deg) scale(1.5); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+  .wheel-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+}
+
+.wheel-disclaimer {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.75rem;
+  color: #ff6b6b;
+  opacity: 0.6;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  z-index: 10;
+  pointer-events: none;
+}

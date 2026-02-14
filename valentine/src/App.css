@@ -1,42 +1,95 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.gallery-cinema-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.gallery-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  padding: 40px 0;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.gallery-nav-container {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  z-index: 1200; /* Ensure it's above other cinematic elements */
+}
+
+.cinema-action-btn {
+  background: white;
+  border: 1px solid var(--border);
+  color: var(--cinema-title);
+  padding: 15px 35px;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(214, 51, 108, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cinema-action-btn:hover {
+  background: var(--cinema-title);
+  color: white;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(214, 51, 108, 0.3);
+}
+
+.cinema-action-btn.unlocked {
+  background: var(--cinema-title);
+  color: white;
+  border-color: var(--cinema-title);
+}
+
+.cinema-action-btn .arrow, .cinema-action-btn .lock {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .gallery-cinema-container {
+    padding: 20px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .cinema-action-btn {
+    padding: 12px 25px;
+    font-size: 0.7rem;
+  }
 }

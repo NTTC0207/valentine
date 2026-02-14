@@ -1,0 +1,78 @@
+.mobile-blocker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  z-index: 10000; /* Ensure it's on top of everything */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #fff;
+  overflow: hidden;
+}
+
+.mobile-content {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  animation: float 6s ease-in-out infinite;
+}
+
+.mobile-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+.mobile-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  margin: 0;
+  color: #ff3366;
+  text-shadow: 2px 2px 0px white;
+}
+
+.mobile-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+  color: #555;
+  font-weight: 500;
+}
+
+.laptop-icon {
+  font-size: 3rem;
+  margin-top: 1.5rem;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-30px);}
+  60% {transform: translateY(-15px);}
+}
+
+/* Hide on desktop (min-width: 1024px) - Adjust breakpoint as needed */
+/* Actually, we handle visibility in JS to prevent flash,
+   but we can use CSS media queries as a fallback or enforcement */
+@media (min-width: 1024px) {
+  .mobile-blocker {
+    display: none !important;
+  }
+}
